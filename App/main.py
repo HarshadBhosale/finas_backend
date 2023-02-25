@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from Database.database import database
 from fastapi.middleware.cors import CORSMiddleware
 from Database.create_tables import create_not_existence_tables
+from Routers import user, auth
 
 api = FastAPI()
 
@@ -33,3 +34,7 @@ def shutdown_event():
 def root():
     version = "0.1.0"
     return {"API": version}
+
+
+api.include_router(user.router)
+api.include_router(auth.router)

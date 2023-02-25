@@ -1,12 +1,6 @@
-from Helper.env import (
-    DATABASE_USER,
-    DATABASE_PASSWORD,
-    DATABASE_HOST,
-    DATABASE_PORT,
-    DATABASE_NAME,
-)
+from Helper.env import envVars
 from playhouse.db_url import connect
 
 database = connect(
-    f"postgresql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}"
+    f"postgresql://{envVars.DATABASE_USER}:{envVars.DATABASE_PASSWORD}@{envVars.DATABASE_HOST}:{envVars.DATABASE_PORT}/{envVars.DATABASE_NAME}"
 )
