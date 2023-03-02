@@ -2,7 +2,7 @@ from pydantic import BaseSettings
 
 
 class EnvironmentVariables(BaseSettings):
-    FINAS_BACKEND_ENV: str = "dev"
+    FINAS_BACKEND_ENV: str
     DATABASE_NAME: str
     DATABASE_USER: str
     DATABASE_PASSWORD: str

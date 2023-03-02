@@ -1,6 +1,22 @@
 from Helper.env import envVars
-from playhouse.db_url import connect
+from peewee import PostgresqlDatabase
 
-database = connect(
-    f"postgresql://{envVars.DATABASE_USER}:{envVars.DATABASE_PASSWORD}@{envVars.DATABASE_HOST}:{envVars.DATABASE_PORT}/{envVars.DATABASE_NAME}"
-)
+PostgresDB = {
+    "dev": PostgresqlDatabase(
+        envVars.DATABASE_NAME,
+        user=envVars.DATABASE_USER,
+        password=envVars.DATABASE_PASSWORD,
+        host=envVars.DATABASE_HOST,
+        port=envVars.DATABASE_PORT,
+        autorollback=True,
+    ),
+    "test": PostgresqlDatabase(
+        (envVars.DATABASE_NAME + "_test"),
+        user=envVars.DATABASE_USER,
+        password=envVars.DATABASE_PASSWORD,
+        host=(envVars.DATABASE_HOST + "_test"),
+        port=envVars.DATABASE_PORT,
+        autorollback=True,
+    ),
+}
+database = PostgresDB[envVars.FINAS_BACKEND_ENV]

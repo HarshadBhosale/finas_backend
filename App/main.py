@@ -1,10 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from Database.database import database
 from fastapi.middleware.cors import CORSMiddleware
 from Database.create_tables import create_not_existence_tables
 from Routers import user, auth
+from Database.Models.roots import RootResponseModel
 
 api = FastAPI()
+API_VERSION = "0.1.0"
 
 origins = [
     "http://localhost:3000/",
@@ -30,10 +32,9 @@ def shutdown_event():
         database.close()
 
 
-@api.get("/")
+@api.get("/", status_code=status.HTTP_200_OK, response_model=RootResponseModel)
 def root():
-    version = "0.1.0"
-    return {"API": version}
+    return RootResponseModel(API=API_VERSION)
 
 
 api.include_router(user.router)

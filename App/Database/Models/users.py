@@ -7,7 +7,7 @@ from typing import Optional
 
 
 class Users(dbBaseModel):
-    id = peewee.UUIDField(unique=True, default=uuid4())
+    id = peewee.UUIDField(unique=True, default=uuid4)
     name = peewee.CharField()
     email = peewee.CharField(unique=True)
     country_code = peewee.SmallIntegerField(null=True)
@@ -42,11 +42,9 @@ class UserUpdateModel(BaseModel):
 class UserResponseModel(BaseModel):
     id: UUID
     name: str
-    email: str
+    email: EmailStr
     country_code: Optional[int] = None
     mobile_number: Optional[int] = None
     access_token: Optional[str] = None
-    token_expire_at: Optional[str] = None
+    token_expire_at: Optional[datetime] = None
     status: int
-    created_at: datetime
-    updated_at: datetime
