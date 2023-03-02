@@ -1,7 +1,19 @@
-import os
+from pydantic import BaseSettings
 
-DATABASE_NAME = os.getenv("DATABASE_NAME")
-DATABASE_USER = os.getenv("DATABASE_USER")
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
-DATABASE_HOST = os.getenv("DATABASE_HOST")
-DATABASE_PORT = os.getenv("DATABASE_PORT")
+
+class EnvironmentVariables(BaseSettings):
+    FINAS_BACKEND_ENV: str
+    DATABASE_NAME: str
+    DATABASE_USER: str
+    DATABASE_PASSWORD: str
+    DATABASE_HOST: str
+    DATABASE_PORT: int
+    SECRET_KEY: str
+    ALGORITHM: str
+    TOKEN_EXPIRE_AFTER_MINS: int
+
+    class Config:
+        env_file = ".env"
+
+
+envVars = EnvironmentVariables()
