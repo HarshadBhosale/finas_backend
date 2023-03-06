@@ -21,5 +21,5 @@ close server at http://localhost:8000/
 Running Tests
 
 ```bash
-  docker-compose -f docker-compose-dev.yml exec api pytest -v .
+  docker-compose -f docker-compose-dev.yml exec api bash Scripts/test_api.sh
 ```
