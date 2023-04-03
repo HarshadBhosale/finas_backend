@@ -1,6 +1,10 @@
-def testHona(client, hona):
+import pytest
+
+
+@pytest.mark.asyncio
+async def testHona(client, hona):
     hona["name"] = "King"
-    response = client.put(
+    response = await client.put(
         f"/users/{hona['id']}",
         headers={"Authorization": f"Bearer {hona['access_token']}"},
         json={"name": hona["name"]},
@@ -11,9 +15,10 @@ def testHona(client, hona):
     assert response.json().get("password", "") == ""
 
 
-def testHB(client, hb):
+@pytest.mark.asyncio
+async def testHB(client, hb):
     hb["name"] = "boss"
-    response = client.put(
+    response = await client.put(
         f"/users/{hb['id']}",
         headers={"Authorization": f"Bearer {hb['access_token']}"},
         json={"name": hb["name"]},

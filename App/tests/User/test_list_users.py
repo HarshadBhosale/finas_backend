@@ -1,6 +1,10 @@
-def testHona(client, hona):
-    response = client.get(
-        "/users", headers={"Authorization": f"Bearer {hona['access_token']}"}
+import pytest
+
+
+@pytest.mark.asyncio
+async def testHona(client, hona):
+    response = await client.get(
+        "/users/", headers={"Authorization": f"Bearer {hona['access_token']}"}
     )
     assert response.status_code == 200
     assert len(response.json()) == 1
@@ -9,9 +13,10 @@ def testHona(client, hona):
     assert response.json()[0].get("password", "") == ""
 
 
-def testHonaHB(client, hona, hb):
-    response = client.get(
-        "/users", headers={"Authorization": f"Bearer {hona['access_token']}"}
+@pytest.mark.asyncio
+async def testHonaHB(client, hona, hb):
+    response = await client.get(
+        "/users/", headers={"Authorization": f"Bearer {hona['access_token']}"}
     )
     assert response.status_code == 200
     assert len(response.json()) == 2
