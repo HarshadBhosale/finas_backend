@@ -1,5 +1,4 @@
 from pydantic import BaseModel, EmailStr, constr
-from datetime import datetime
 from typing import Optional
 from Helper.env import envVars
 from datetime import datetime, timedelta

@@ -59,7 +59,6 @@ def updateUser(
     id: UUID,
     user: UserUpdateModel,
     current_user: UUID = Depends(get_current_user),
-    response_model=UserResponseModel,
 ):
     Users.update(user.dict(exclude_defaults=True)).where(
         Users.id == id, Users.status == 1
@@ -68,5 +67,5 @@ def updateUser(
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def updateUser(id: UUID, current_user: UUID = Depends(get_current_user)):
+def deleteUser(id: UUID, current_user: UUID = Depends(get_current_user)):
     return Users.update(status=0).where(Users.id == id, Users.status == 1).execute()
