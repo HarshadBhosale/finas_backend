@@ -1,4 +1,7 @@
 import pytest
+import nest_asyncio
+
+nest_asyncio.apply()
 
 
 @pytest.mark.asyncio
@@ -9,7 +12,7 @@ import pytest
 async def testUser(client, user, request):
     user = request.getfixturevalue(user)
     response = await client.get(
-        "/users", headers={"Authorization": f"Bearer {user['access_token']}"}
+        "/users/", headers={"Authorization": f"Bearer {user['access_token']}"}
     )
     assert response.status_code == 200
     assert len(response.json()) == 1
